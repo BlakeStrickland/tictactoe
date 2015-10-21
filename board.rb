@@ -30,11 +30,25 @@ def update_board(move)
   @board[y_move(move)][x_move(move)] = "X"
 end
 
+def validate_move(move)
+  move_hash = {"A" => 0, "B" => 1, "C" => 2}
+  x = move[1..-1].to_i - 1
+  y =move_hash[move[0].upcase]
+
+  if x == 0 || x == 1 || x == 2 && y == 0 || y == 1 || y == 2
+    update_board(move)
+    display_board
+  else
+    puts "Invalid move"
+  end
+end
 
 puts "Let's play!"
 display_board
+loop do
+  puts "Enter your move: "
+  move = gets.chomp
+  move = move[0] + move[1]
+  validate_move(move)
 
-puts "Enter your move: "
-move = gets.chomp
-update_board(move)
-display_board
+end
