@@ -1,0 +1,89 @@
+irb(main):001:0> array = [1,2,3,4]
+=> [1, 2, 3, 4]
+irb(main):002:0> array.pop
+=> 4
+irb(main):003:0> array.shift
+=> 1
+irb(main):004:0> array.unshift(5)
+=> [5, 2, 3]
+irb(main):005:0> array.push(1)
+=> [5, 2, 3, 1]
+
+
+gem 'delayed_job_active_record'
+gem 'daemons'
+ rails g delayed_job:active_record
+
+controller
+def search
+  if params[:search]
+  ...
+  MakeCsvJob.perform_later(params[:search])
+  end
+
+end
+
+
+ require 'csv'
+
+def perform(expenses)
+ CSV.open("search.csv", "w") do |csv|
+  csv << ["Payee", "Spent On"]
+    expenses.each do |e|
+      csv << [e.payee, e.sent_on]
+    end
+ end
+
+CSV.open(File.join(Rails.root, "public", "search.csv-#{Time.now}"), "w")
+
+rails g job MakeCsv 11:34
+
+MakeCsvJob.perform_later(params[:search])
+                  _now()
+
+
+in config file inside module
+ config.autoload_paths << Rails.root.join("app", "jobs")
+
+ config.actve_job.queue_adapter= :delayed_job
+
+
+
+bin/delayed_job start
+                stop
+                restart
+
+MakeCsvJob..set(wait_until: Time.now + 1.minute)perform_later(params[:search])
+               (wait: 10.seconds)
+
+
+
+refactored at 12:14
+
+model
+def self.search_results(search_term)
+  q= "%#{search_term}%"
+  expenses = Expense.joins(account: {client: branch}).
+     where("payee LIKE ? OR accounts.name LIKE ? OR client.name LIKE ? OR branch.name LIKE ?", q,q,q,q)
+  end
+end
+
+job
+require 'csv'
+def perform(search_term)
+  expenses = Expense.search_results()
+  CSV.open(File.join(Rails.root, "public", "search-#{Time.now}.csv", "w") do |csv|
+    csv << ["Payee", "Sent On"]
+    expenses.each do |e|
+      csv << [e.payee, e.spent_on]
+    end
+  end
+end
+
+controller
+def search
+  if params[:search]
+    @expenses = Expense.seach_results(params[:search])
+    MakeCsvJob.set(wait: 10.seconds).perform_later(params[:search])
+  end
+end
