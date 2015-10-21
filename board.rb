@@ -35,7 +35,8 @@ def validate_move(move)
   x = move[1..-1].to_i - 1
   y =move_hash[move[0].upcase]
 
-  if x == 0 || x == 1 || x == 2 && y == 0 || y == 1 || y == 2
+
+  if (x == 0 || x == 1 || x == 2) && (y == 0 || y == 1 || y == 2) && !nil
     update_board(move)
     display_board
   else
@@ -43,11 +44,20 @@ def validate_move(move)
   end
 end
 
+def is_empty?(move)
+  return true if move.empty? || move.nil?
+  return false
+end
+
 puts "Let's play!"
 display_board
 loop do
   puts "Enter your move: "
   move = gets.chomp
+  if move.empty?
+    puts "Invalid move."
+    redo
+  end
   move = move[0] + move[1]
   validate_move(move)
 
