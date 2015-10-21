@@ -17,8 +17,24 @@ def display_board
   end
 end
 
+def x_move(move)
+  move[1..-1].to_i - 1
+end
+
+def y_move(move)
+  move_hash = {"A" => 0, "B" => 1, "C" => 2}
+  move_hash[move[0].upcase]
+end
+
+def update_board(move)
+  @board[y_move(move)][x_move(move)] = "X"
+end
+
+
+puts "Let's play!"
 display_board
-puts
-puts
-@board[2][2] = "X"
+
+puts "Enter your move: "
+move = gets.chomp
+update_board(move)
 display_board
