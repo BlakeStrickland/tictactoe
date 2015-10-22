@@ -8,7 +8,8 @@ position = Position.new
 
 new_board.display_board
 
-loop do
+while new_board.board.any? {|x| x.include?(" ")}
+
   puts "Enter your move: "
   move = gets.chomp
   if move.empty? || move.length != 2
@@ -24,6 +25,5 @@ loop do
   else
     puts "Invalid move2"
   end
-
-puts new_board.update_board.inspect
 end
+puts "Game Over"
