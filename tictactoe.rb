@@ -4,6 +4,8 @@ require './board'
 
 puts "Let's play!"
 new_board = Board.new
+position = Position.new
+
 new_board.display_board
 
 loop do
@@ -13,7 +15,6 @@ loop do
     puts "Invalid move."
     redo
   end
-  position = Position.new
 
 
   if position.validate_move?(move)
@@ -21,8 +22,8 @@ loop do
     new_board.update_board
     new_board.display_board
   else
-    puts "Invalid move"
+    puts "Invalid move2"
   end
 
-
+puts new_board.update_board.inspect
 end

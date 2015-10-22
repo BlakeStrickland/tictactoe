@@ -1,5 +1,5 @@
 class Board
-  attr_reader :positions
+  attr_reader :positions, :board
   def initialize
     @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
     @positions = []
@@ -10,10 +10,10 @@ class Board
     (0..2).each do |row|
       (0..2).each do |col|
         board_display += @board[row][col]
-        board_display += " | " unless col == 2
+        board_display += "|" unless col == 2
       end
       puts board_display
-      puts "---------" unless row == 2
+      puts "-----" unless row == 2
       board_display = ""
     end
   end
@@ -22,7 +22,6 @@ class Board
     self.positions.each do |position|
       @board[position.x][position.y] = "X"
     end
-
   end
 
 end
