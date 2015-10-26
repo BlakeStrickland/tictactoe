@@ -21,13 +21,18 @@ while new_board.board.any? {|x| x.include?(" ")}
   end
 
   position = Position.new
-  if position.validate_move?(move, new_board)
+  if position.validate_move?(move, new_board.board)
     new_board.positions << position
     new_board.update_board
     new_board.display_board
   else
     puts "Invalid move2"
     redo
+  end
+
+  if position.winning_combo?(new_board.board)
+    puts "aydahifjnaiufbakdnfgakidbvald #{name} skjdhvglahdoadnvlhsoava"
+    break
   end
   name == xname ? (name = oname) : (name = xname)
 end
