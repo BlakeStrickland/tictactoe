@@ -27,6 +27,7 @@ while new_board.board.any? {|x| x.include?(" ")}
     new_board.display_board
   else
     puts "Invalid move2"
+    redo
   end
   name == xname ? (name = oname) : (name = xname)
 end
