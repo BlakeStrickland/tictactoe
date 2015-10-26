@@ -4,7 +4,6 @@ require './board'
 
 puts "Let's play!"
 new_board = Board.new
-position = Position.new
 
 new_board.display_board
 
@@ -18,6 +17,7 @@ while new_board.board.any? {|x| x.include?(" ")}
   end
 
 
+  position = Position.new
   if position.validate_move?(move)
     new_board.positions << position
     new_board.update_board
@@ -25,5 +25,6 @@ while new_board.board.any? {|x| x.include?(" ")}
   else
     puts "Invalid move2"
   end
+
 end
 puts "Game Over"

@@ -1,6 +1,10 @@
 class Board
-  attr_reader :positions, :board
+  attr_reader :positions, :board, :next_move
   def initialize
+    # @board = [[Position.new,Position.new,Position.new],
+    #     [Position.new,Position.new,Position.new],
+    #     [Position.new,Position.new,Position.new]]
+
     @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
     @positions = []
   end
@@ -19,8 +23,14 @@ class Board
   end
 
   def update_board
+    next_move = "X"
     self.positions.each do |position|
-      @board[position.x][position.y] = "X"
+      @board[position.x][position.y] = next_move
+      if next_move == "X"
+        next_move = "O"
+      else
+        next_move = "X"
+      end
     end
   end
 
