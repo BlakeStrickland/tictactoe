@@ -1,5 +1,5 @@
 class Board
-  attr_reader :positions, :board, :next_move
+  attr_reader :positions, :board
   def initialize
     # @board = [[Position.new,Position.new,Position.new],
     #     [Position.new,Position.new,Position.new],
@@ -33,5 +33,4 @@ class Board
       end
     end
   end
-
 end

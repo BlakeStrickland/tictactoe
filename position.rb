@@ -1,15 +1,15 @@
+require 'byebug'
 class Position
   attr_reader :x, :y
 
-  def validate_move?(move)
-    position = []
-    move_hash = {"A" => 0, "B" => 1, "C" => 2}
+  def validate_move?(move, new_board)
 
-    x = move[1..-1].to_i - 1
-    y = move_hash[move[0].upcase]
-    if (x == 0 || x == 1 || x == 2) && (y == 0 || y == 1 || y == 2)
-      @x = y
-      @y = x
+    move_hash = {"A" => 0, "B" => 1, "C" => 2}
+    y = move[1..-1].to_i - 1
+    x = move_hash[move[0].upcase]
+    if (0..2).include?(x) && (y == 0 || y == 1 || y == 2) && new_board.board[x][y] == (" ")
+      @x = x
+      @y = y
       true
     else
       false
