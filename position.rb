@@ -16,6 +16,9 @@ class Position
     end
   end
 
+
+
+
   def winning_combo?(board)
 
     #all of "X" possible winnings

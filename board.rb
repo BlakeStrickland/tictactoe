@@ -26,6 +26,7 @@ class Board
     next_move = "X"
     self.positions.each do |position|
       @board[position.x][position.y] = next_move
+      # puts "i set poistion #{position.x},#{position.y} to #{next_move}"
       if next_move == "X"
         next_move = "O"
       else
