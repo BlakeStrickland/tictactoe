@@ -31,7 +31,7 @@ while new_board.board.any? {|x| x.include?(" ")}
   end
 
   if position.winning_combo?(new_board.board)
-    puts "aydahifjnaiufbakdnfgakidbvald #{name} skjdhvglahdoadnvlhsoava"
+    puts " #{name}'s name'"
     break
   end
   name == xname ? (name = oname) : (name = xname)
