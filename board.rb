@@ -23,15 +23,9 @@ class Board
   end
 
   def update_board
-    next_move = "X"
-    self.positions.each do |position|
-      @board[position.x][position.y] = next_move
-      # puts "i set poistion #{position.x},#{position.y} to #{next_move}"
-      if next_move == "X"
-        next_move = "O"
-      else
-        next_move = "X"
-      end
-    end
+    last_move = (positions.length % 2 == 0 ? "O" : "X")
+    position = positions.last
+    @board[position.x][position.y] = last_move
+    puts "i set poistion #{position.x},#{position.y} to #{last_move}"
   end
 end
